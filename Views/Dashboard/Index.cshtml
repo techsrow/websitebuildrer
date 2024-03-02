@@ -1,0 +1,207 @@
+﻿  @model WebsiteBuilder.ViewModels.AdminViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="block-header">
+    <div class="row clearfix justify-content-center">
+
+        <div class="col-md-12 col-sm-12 text-center">
+
+            @if (Model.Website.WebsiteId < 0)
+            {
+                <a asp-controller="Website" asp-action="Create" class="btn btn-sm btn-primary" title="">Create Website</a>
+            }
+            else
+            {
+                <a asp-controller="Website" asp-action="Edit" asp-route-id="@Model.Website.WebsiteId" class="btn btn-sm btn-primary" title="">Edit Website</a>
+                <a asp-controller="Slider" asp-action="Index" class="btn btn-sm btn-primary" title="">Slider</a>
+                <a asp-controller="AboutUs" asp-action="Index" class="btn btn-sm btn-primary" title="">About</a>
+                <a asp-controller="WhyChooseUs" asp-action="Index" class="btn btn-sm btn-primary" title="">Why Choose Us</a>
+                <a asp-controller="Services" asp-action="Index" class="btn btn-sm btn-primary" title="">Services</a>
+                <a asp-controller="Appointment" asp-action="Index" class="btn btn-sm btn-primary" title="">Appointment</a>
+                <a asp-controller="Counter" asp-action="Index" class="btn btn-sm btn-primary" title="">Counter</a>
+                <a asp-controller="Testimonail" asp-action="Index" class="btn btn-sm btn-primary" title="">Testimonial</a>
+                <a asp-controller="Seo" asp-action="Index" class="btn btn-sm btn-primary" title="">SEO</a>
+                <a asp-controller="Customization" asp-action="Index" class="btn btn-sm btn-primary" title="">Customization</a>
+                <a asp-controller="CustomCss" asp-action="Index" class="btn btn-sm btn-primary" title="">Custom Css</a>
+                <a asp-controller="Addon" asp-action="Index" class="btn btn-sm btn-primary" title="">Addon</a>
+
+
+
+            }
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+
+    <div class="row clearfix">
+        <div class="col-lg-4 col-md-12">
+            <div class="card profile-header">
+                <div class="body text-center">
+                    <div class="profile-image mb-3">
+                        @if (Model.Website.PersonalPhoto != null)
+                        {
+                            <img src="@Model.Website.PersonalPhoto" height="150" width="150" class="rounded-circle" alt="">
+                        }
+
+                    </div>
+                    <div>
+                        <h4 class="mb-0"><strong>@Model.Website.Title</strong></h4>
+                        <span>@Model.Website.NamewithDesignation</span>
+                    </div>
+                    <div class="mt-3">
+                        @{
+                            var protocol = Context.Request.Scheme;
+                            var host = Context.Request.Host;
+                            var baseUrl = $"{protocol}://{host}";
+                        }
+                        <a class="btn btn-primary" target="_blank" href="@baseUrl/@Model.Website.PublicUrl">Your Site</a>
+                        <a href="whatsapp://send?text=@baseUrl/@Model.Website.PublicUrl" class="btn btn-outline-secondary">Share on WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="header">
+                    <h2>Info</h2>
+                    <ul class="header-dropdown dropdown dropdown-animated scale-left">
+                        <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
+                        <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
+                        
+                    </ul>
+                </div>
+                <div class="body">
+                    <small class="text-muted">Address: </small>
+                    @if (Model.Website.FullAddress != null)
+                    {
+                        <p>@Model.Website.FullAddress</p>
+                    }
+                    <div>
+                        @if (Model.Website.FullAddress != null)
+                        {
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1923731.7533500232!2d-120.39098936853455!3d37.63767091877441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1522391841133" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        }
+
+                    </div>
+                    <hr>
+                    <small class="text-muted">Email address: </small>
+                    @if (Model.Website.Email != null)
+                    {
+                        <p>@Model.Website.Email</p>
+                    }
+
+                    <hr>
+                    <small class="text-muted">Mobile: </small>
+                    @if (Model.Website.CallingNumber != null)
+                    {
+                        <p>@Model.Website.CallingNumber</p>
+                    }
+
+                    <hr>
+                    @*<small class="text-muted">Birth Date: </small>
+        <p class="m-b-0">October 22th, 1990</p>*@
+                    @*<hr>*@
+                    <small class="text-muted">Social: </small>
+                    @if (Model.Website.facebook != null)
+                    {<p><i class="fa fa-facebook  m-r-5"></i> @Model.Website.facebook</p>}
+                    @if (Model.Website.Instagram != null)
+                    {<p><i class="fa fa-instagram m-r-5"></i> @Model.Website.Instagram</p>}
+                    @if (Model.Website.Twitter != null)
+                    {<p><i class="fa fa-twitter m-r-5"></i> @Model.Website.Twitter</p>}
+                    @if (Model.Website.Linkdin != null)
+                    {<p><i class="fa fa-linkedin m-r-5"></i> @Model.Website.Linkdin</p>}
+                    @if (Model.Website.Youtube != null)
+                    {<p><i class="fa fa-youtube m-r-5"></i> @Model.Website.Youtube</p>}
+
+
+
+
+
+
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <div class="col-lg-8 col-md-12">
+            <div class="card">
+                <div class="body">
+                    <ul class="nav nav-tabs-new">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Overview">Overview</a></li>
+                        @*<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Settings">Settings</a></li>*@
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content padding-0">
+                <div class="tab-pane blog-page active" id="Overview">
+                    <div class="row clearfix text-center">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="body">
+                                    
+                                    <h6 class="mb-0 mt-3">Total Profile Views By This Month:</h6>
+                                   
+                                    <spapn>@Model.Click </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="body">
+                                    
+                                    <h6 class="mb-0 mt-3">Total Click</h6>
+                                    <span>Total Click</span>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                    @*<div class="card">
+                        <div class="body">
+                            <div class="row profile_state">
+                                <div class="col-lg-3 col-md-6">
+                                    <i class="fa fa-camera"></i>
+                                    <h5 class="m-b-0 number count-to" data-from="0" data-to="2365" data-speed="1000" data-fresh-interval="700">2365</h5>
+                                    <small>Shots View</small>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <h5 class="m-b-0 number count-to" data-from="0" data-to="1203" data-speed="1000" data-fresh-interval="700">1203</h5>
+                                    <small>Likes</small>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <i class="fa fa-comments-o"></i>
+                                    <h5 class="m-b-0 number count-to" data-from="0" data-to="324" data-speed="1000" data-fresh-interval="700">324</h5>
+                                    <small>Comments</small>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <i class="fa fa-user"></i>
+                                    <h5 class="m-b-0 number count-to" data-from="0" data-to="1980" data-speed="1000" data-fresh-interval="700">1980</h5>
+                                    <small>Profile Views</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="body">
+                            <div class="summernote">
+                                <h3 class="m-b-0">hi,</h3>
+                                <h4 class="m-t-0">we are Summernote</h4>
+                                <p></p>
+                            </div>
+                            <button class="btn btn-primary">Post</button>
+                        </div>
+                    </div>*@
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

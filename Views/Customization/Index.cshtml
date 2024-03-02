@@ -1,0 +1,49 @@
+﻿@model List<WebsiteBuilder.Models.Customization>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h2>Seo  for the Website</h2>
+
+
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Theme Color</td>
+            <td>Heading Color</td>
+            <td>Sub heading Color</td>
+            <td>Text Color</td>
+            <td>Primary BgColor</td>
+            <td>Secondry BgColor</td>
+            <td></td>
+            
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var theme in Model)
+        {
+
+            <tr>
+                <td>@theme.ThemeColor</td>
+                <td>@theme.headingColor</td>
+                <td>@theme.SubheadingColor</td>
+                <td>@theme.TextColor</td>
+                <td>@theme.PrimaryBgColor</td>
+                <td>@theme.SecondryBgColor</td>
+                
+            </tr>
+
+        }
+
+    </tbody>
+</table>

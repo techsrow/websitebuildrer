@@ -1,0 +1,91 @@
+﻿@model WebsiteBuilder.Models.Seo
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Create";
+
+    Layout = "~/Views/Shared/_WebsiteCreateLayout.cshtml";
+
+}
+
+
+
+
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <label>Seo Title</label>
+    <input asp-for="SeoTitle" class="form-control" />
+
+    <label>Canonical Tag</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="canonicalUrl" class="form-control" />
+
+
+    <label>Meta Description</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="MetaDescription" class="form-control" />
+
+    <label>OG Title</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="OgTitle" class="form-control" />
+
+  
+
+
+    <label>OG Description</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="OgDescription" class="form-control" />
+
+
+
+
+    <label>OG Url</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="OgUrl" class="form-control" />
+
+    <label>OG Sitename</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="SiteName" class="form-control" />
+
+    <label>OG Image Url</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="OgImageUrl" class="form-control" />
+
+    <label>Author Name</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="authorname" class="form-control" />
+
+    <label>X Meta Tags</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="TwitterImageUrl" class="form-control" />
+
+
+    <label>Meta Facebook Tags</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="MetaTagsForFacebook" class="form-control" />
+
+    <label>Meta Instagram</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="MetaTagsForInstagram" class="form-control" />
+
+    <label>Addon Scripts</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="CustomScript" class="form-control" />
+
+    <label>Google Analytics Code</label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="GoogleAnalytics" class="form-control" />
+
+  
+
+    <label>Image</label>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input name="imageFile" type="file" class="form-control" />
+
+    <input type="submit" value="Create" style="background-color: #FEB800;border:none;" class="btn btn-primary btn-block btn-lg" />
+</form>

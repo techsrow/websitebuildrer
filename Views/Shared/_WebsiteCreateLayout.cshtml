@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Creative Maitra Digital Card</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="HexaBit Bootstrap 4x Admin Template">
+    <meta name="author" content="WrapTheme, www.thememakker.com">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/charts-c3/plugin.css" />
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="~/Theme/admin/assets/css/main.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/css/color_skins.css">
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="~/Theme/admin/assets/css/blog.css">
+
+    <link rel="stylesheet" href="~/Theme/admin/assets/vendor/dropify/css/dropify.min.css">
+
+
+
+
+
+
+
+
+</head>
+<body class="theme-orange">
+
+   
+
+    <div id="wrapper">
+
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+
+                <div class="navbar-left">
+                    <div class="navbar-btn">
+                        <a href="index.html"><img src="~/Theme/admin/assets/images/icon-light.svg" alt="HexaBit Logo" class="img-fluid logo"></a>
+                        <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
+                    </div>
+                    <a href="javascript:void(0);" class="icon-menu btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown dropdown-animated scale-right">
+                            <a asp-controller="User" asp-action="ChangePassword" class="dropdown-toggle icon-menu"><i class="icon-grid"></i></a>
+
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="navbar-right">
+                    <form id="navbar-search" class="navbar-form search-form">
+                        <input value="" class="form-control" placeholder="Search here." type="text">
+                        <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
+                    </form>
+
+                    <div id="navbar-menu">
+                        <ul class="nav navbar-nav">
+                            @await Html.PartialAsync("_LoginPartialView")
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+       
+
+        <div id="main-content">
+            @RenderBody()
+        </div>
+
+    </div>
+    
+    <!-- Javascript -->
+    <script src="~/Theme/admin/assets/bundles/libscripts.bundle.js"></script>
+    <script src="~/Theme/admin/assets/bundles/vendorscripts.bundle.js"></script>
+
+    <script src="~/Theme/admin/assets/bundles/c3.bundle.js"></script>
+    <script src="~/Theme/admin/assets/bundles/chartist.bundle.js"></script>
+    <script src="~/Theme/admin/assets/vendor/toastr/toastr.js"></script>
+
+    <script src="~/Theme/admin/assets/bundles/mainscripts.bundle.js"></script>
+    <script src="~/Theme/admin/assets/js/index.js"></script>
+    <script src="~/Theme/admin/assets/vendor/jquery/jquery.js"></script>
+
+   
+
+
+
+
+
+
+
+    <script src="~/Theme/admin/assets/bundles/knob.bundle.js"></script><!-- Jquery Knob-->
+    <script src="~/Theme/admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+
+    <script src="~/Theme/admin/assets/vendor/summernote/dist/summernote.js"></script>
+    
+    <script src="~/Theme/admin/assets/vendor/ckeditor/ckeditor.js"></script>
+    <script src="~/Theme/admin/assets/js/pages/forms/editors.js"></script>
+    <script>
+        $(function () {
+            $('.knob').knob({
+                draw: function () {
+                }
+            });
+        });
+    </script>
+</body>
+</html>

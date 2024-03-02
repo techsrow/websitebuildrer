@@ -1,0 +1,431 @@
+﻿@using WebsiteBuilder.Models
+@using WebsiteBuilder.Data
+@model WebsiteBuilder.ViewModels.AdminViewModel
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+<!-- banner section -->
+<section id="home" class="w3l-banner py-5">
+    <div class="container py-lg-5 py-md-4 mt-lg-0 mt-5">
+        <div class="row align-items-center py-lg-5 py-4 mt-4">
+            <div class="col-lg-6 col-sm-12 mt-lg-5">
+                <h3 class="mb-4 title">
+                    Digital Impressions <span class="type-js"><span class="text-js">Endless Connections</span></span><br>
+                    Your Virtual Identity Card.
+                </h3>
+                <div class="separatorhny"></div>
+                <p>Craft Your Identity: Design Your Digital Visiting Card</p>
+
+                <div class="mt-md-5 mt-4 mb-lg-0 mb-4">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                       
+                         
+
+            <a class="btn btn-primary btn-style" asp-controller="Website" asp-action="Create">Make Your Card</a>
+
+
+
+            <a class="btn btn-primary btn-style" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+        }
+
+        else
+        {
+            <a asp-controller="User" asp-action="LogIn" class="btn btn-style btn-white mr-lg-4 mr-sm-3">Sign In</a>
+            <a class="btn btn-primary btn-style" asp-controller="User" asp-action="Register">Register Now</a>
+
+
+        }
+                </div>
+            </div>
+            <div class="col-lg-5 offset-lg-1 col-md-8 col-sm-10 mt-lg-0 mt-5">
+                <div class="banner-play-w3 text-lg-center">
+                    <!--//video-->
+                    <!--//video-->
+                    @*<a href="#small-dialog" class="popup-with-zoom-anim play-view text-center pl-3">
+                            <span class="video-play-icon">
+                                <span class="fa fa-play"></span>
+                            </span>
+                        </a>*@
+
+                    <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+                    <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                        <iframe src="https://player.vimeo.com/video/326582338" frameborder="0"
+                                allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>
+                    <!--//video-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- //banner section -->
+<!-- /content-1-->
+<div class="content-1 py-5">
+    <div class="container py-md-5">
+        <div class="row content-1-grids">
+            <div class="col-lg-5 content-1-left forms-25-info">
+                <div class="header-title">
+                    <h3 class="hny-title mb-4">
+                        Elevate Your Presence with Our Innovative Digital Branding Solutions Today.
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-7 content-1-right pl-lg-5 mt-lg-0 mt-4">
+                <p class="">
+                    At our cutting-edge digital visiting card agency, we specialize in crafting personalized and innovative digital identities for individuals and businesses. With a focus on creativity and technology, we design cards that make lasting impressions. Elevate your networking experience with our seamless and visually striking solutions.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //content-1-->
+<section class="w3l-bottom-grids-6 py-5" id="features">
+    <div class="container py-lg-5 py-md-4">
+        <div class="grids-area-hny main-cont-wthree-fea row">
+            <div class="col-lg-7 features-lefthny">
+                <div class="row">
+                    <!-- /feature-left-->
+                    <div class="col-md-6 grids-feature">
+                        <div class="area-box">
+                            <span class="fa fa-video-camera"></span>
+                            <h4><a href="#feature" class="title-head">Accessibility</a></h4>
+                            <p class="mt-3">Instantly share your contact details with anyone, anytime, enhancing accessibility and convenience</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 grids-feature mt-sm-0 mt-4">
+                        <div class="area-box">
+                            <span class="fa fa-tasks"></span>
+                            <h4><a href="#feature" class="title-head">Environmentally Friendly</a></h4>
+                            <p class="mt-3">Reduce paper waste and contribute to a greener environment.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 grids-feature mt-4">
+                        <div class="area-box">
+
+                            <span class="fa fa-pencil-square-o"></span>
+                            <h4><a href="#feature" class="title-head">Interactivity</a></h4>
+                            <p class="mt-3">Include clickable links to your website, social media, or portfolio, providing a more interactive experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 grids-feature mt-4">
+                        <div class="area-box">
+
+                            <span class="fa fa-users"></span>
+                            <h4><a href="#feature" class="title-head">Global Reach</a></h4>
+                            <p class="mt-3">Facilitate international connections effortlessly, transcending geographical boundaries.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- //feature-left-->
+            </div>
+            <div class="col-lg-5 features-rightthny mt-lg-0 mt-5 pl-lg-5">
+                <h3 class="hny-title mb-4">We found our creative space that is open for you.</h3>
+                <div class="separatorhny"></div>
+                <p>
+                    Digital cards offer instant accessibility, eco-friendliness, and dynamic updates. They are cost-effective, providing global reach and interactivity through clickable links. Analytics empower insights, maintaining a professional image. Multimedia integration enhances engagement, while centralized storage ensures convenience, making traditional cards seem outdated.
+                </p>
+                <a class="btn btn-primary btn-style mt-md-5 mt-4" href="about.html">Read More</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- //bottom-grids-->
+<section class="w3l-servicesblock py-5" id="about">
+    <div class="container py-lg-5 py-md-3">
+        <div class="row">
+            <div class="col-lg-3 col-6 left-wthree-img">
+                <img src="~/Theme/assets/images/s1.jpg" alt="" class="img-fluid radius-image">
+            </div>
+            <div class="col-lg-3 col-6 left-wthree-img">
+                <img src="~/Theme/assets/images/s2.jpg" alt="" class="img-fluid radius-image">
+            </div>
+            <div class="col-lg-6 about-right-faq align-self mt-lg-0 mt-sm-5 mt-4 pl-lg-5">
+                <h3 class="hny-title mb-4">We Work for Your Incredible Success</h3>
+                <div class="separatorhny"></div>
+                <p class="">
+                    Partner with us for a journey toward unparalleled achievements in your endeavors.
+                </p>
+                <div class="two-grids mt-md-0 mt-md-5 mt-4">
+                    <div class="grids_info">
+                        <h4>Our Mission</h4>
+                        <p class="">
+                            Elevate your professional image with our cutting-edge designs.
+                        </p>
+                    </div>
+                    <div class="grids_info">
+                        <h4>Our Vision</h4>
+                        <p class="">
+                            We aspire to set new standards in digital card creation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="w3l-homeblog py-5" id="services">
+    <div class="container py-lg-5 py-md-4">
+        <h4 class="sub-titlehny">What We Do</h4>
+        <h3 class="hny-title mx-0 mb-4 text-left">Our Services</h3>
+        <div class="separatorhny"></div>
+        <p class="sup-ser-para mb-sm-5 mb-4">
+            Our services encompass a spectrum of cutting-edge solutions tailored to elevate your brand. From captivating web design and development to strategic SEO, social media management, and beyond, we craft digital success stories that leave a lasting impact.
+        </p>
+
+        <div class="row top-pics">
+            <div class="ser-grid col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="top-pic1">
+                    <div class="card-body blog-details">
+                        <div class="icon-ser"><span class="fa fa-linode"></span></div>
+                        <a href="#" class="blog-desc" style="text-transform:capitalize;">
+
+                            Creative<br> Deisgn
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="ser-grid col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="top-pic2">
+                    <div class="card-body blog-details">
+                        <div class="icon-ser"><span class="fa fa-thumbs-o-up"></span></div>
+                        <a href="#" class="blog-desc">
+                            Modern<br> Photography
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ser-grid col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="top-pic3">
+                    <div class="card-body blog-details">
+                        <div class="icon-ser"><span class="fa fa-money"></span></div>
+                        <a href="#" class="blog-desc">
+                            Modern<br> Videography
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="ser-grid col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="top-pic4">
+                    <div class="card-body blog-details">
+                        <div class="icon-ser"><span class="fa fa-handshake-o"></span></div>
+                        <a href="#" class="blog-desc">
+                            SEO &<br> SRM
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="ser-grid col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="top-pic5">
+                    <div class="card-body blog-details">
+                        <div class="icon-ser"><span class="fa fa-bullhorn"></span></div>
+                        <a href="#" class="blog-desc">
+                            Digital<br> Marketing
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ser-grid col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="top-pic6">
+                    <div class="card-body blog-details">
+                        <div class="icon-ser"><span class="fa fa-cubes"></span></div>
+                        <a href="#" class="blog-desc">
+                            Website<br>Development
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="readhny-btm text-center mx-auto mt-md-4">
+            <a class="btn btn-primary btn-style mt-md-5 mt-4" href="#">Read More</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- stats -->
+<section class="w3_stats py-5" id="stats">
+    <div class="container py-md-4">
+        <div class="w3-stats">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="counter">
+                        <span class="fa fa-clone"></span>
+                        <div class="timer count-title count-number mt-3" data-to="496" data-speed="1500"></div>
+                        <p class="count-text">Total Projects</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="counter">
+                        <span class="fa fa-video-camera"></span>
+                        <div class="timer count-title count-number mt-3" data-to="9" data-speed="1500"></div>
+                        <p class="count-text ">Year of Experience</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="counter">
+                        <span class="fa fa-smile-o"></span>
+                        <div class="timer count-title count-number mt-3" data-to="525" data-speed="1500"></div>
+                        <p class="count-text">Happy Clients</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="counter">
+                        <span class="fa fa-users"></span>
+                        <div class="timer count-title count-number mt-3" data-to="2560" data-speed="1500"></div>
+                        <p class="count-text">
+                            Cups Of Cutting Chai
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //stats -->
+<!-- middle -->
+<div class="middle py-5">
+    <div class="container py-md-4">
+        <div class="welcome-left text-left py-lg-4">
+            <h3 class="hny-title mb-4">
+                Empower Your Presence, Craft a Digital Legacy with Every Card!.
+            </h3>
+            <div class="separatorhny"></div>
+            <p class="pr-lg-5 mr-lg-5">
+                We believe in empowering your professional journey by creating a digital legacy with every card. Our cutting-edge designs transcend traditional boundaries, leaving a lasting impression in the digital realm. Elevate your presence, showcase your identity, and make every connection count.
+            </p>
+            <a asp-controller="User" asp-action="Login" class="btn btn-style btn-white mt-sm-5 mt-4 mr-2">Sign In</a>
+            <a asp-controller="User" asp-action="Register" class="btn btn-style btn-primary mt-sm-5 mt-4">Make Digital Card</a>
+        </div>
+    </div>
+</div>
+<!-- //middle -->
+<!-- testimonials -->
+<!--<section class="w3l-clients-1" id="testimonials">-->
+<!-- /grids -->
+<!--<div class="cusrtomer-layout py-5">
+    <div class="container py-lg-5 py-md-4">
+        <div class="heading align-self text-center">
+            <h6 class="sub-titlehny">Testimonials</h6>
+            <h3 class="hny-title mb-md-5 mb-4">What People Say</h3>
+        </div>-->
+<!-- /grids -->
+<!--<div class="testimonial-row">
+        <div id="owl-demo1" class="owl-two owl-carousel owl-theme mb-md-3 mb-sm-5 mb-4">
+            <div class="item">
+                <div class="testimonial-content">
+                    <div class="testimonial">
+                        <div class="test-img">
+                            <img src="~/Theme/assets/images/team1.jpg" class="img-fluid" alt="client-img">
+                        </div>
+                        <blockquote>
+                            <q>
+                                Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
+                                laudantium Quas minima sunt natus tempore, maiores aliquid modi felis vitae
+                                facere aperiam sequi optio lacinia id ipsum non velit, culpa.
+                                voluptate rem ullam dolore nisi est quasi, doloribus tempora.
+                            </q>
+                        </blockquote>
+                        <div class="testi-des">
+                            <div class="peopl align-self">
+                                <h3>Gloria Parker</h3>
+                                <p class="indentity">Client Of Company </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="testimonial-content">
+                    <div class="testimonial">
+                        <div class="test-img">
+                            <img src="~/Theme/assets/images/team2.jpg" class="img-fluid"
+                                 alt="client-img">
+                        </div>
+                        <blockquote>
+                            <q>
+                                Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
+                                laudantium Quas minima sunt natus tempore, maiores aliquid modi felis vitae
+                                facere aperiam sequi optio lacinia id ipsum non velit, culpa.
+                                voluptate rem ullam dolore nisi est quasi, doloribus tempora.
+                            </q>
+                        </blockquote>
+                        <div class="testi-des">
+                            <div class="peopl align-self">
+                                <h3>Tommy sakura</h3>
+                                <p class="indentity">Client Of Company </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="testimonial-content">
+                    <div class="testimonial">
+                        <div class="test-img">
+                            <img src="~/Theme/assets/images/team3.jpg" class="img-fluid"
+                                 alt="client-img">
+                        </div>
+                        <blockquote>
+                            <q>
+                                Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
+                                laudantium Quas minima sunt natus tempore, maiores aliquid modi felis vitae
+                                facere aperiam sequi optio lacinia id ipsum non velit, culpa.
+                                voluptate rem ullam dolore nisi est quasi, doloribus tempora.
+                            </q>
+                        </blockquote>
+                        <div class="testi-des">
+                            <div class="peopl align-self">
+                                <h3>Bruce Bailey </h3>
+                                <p class="indentity">Client Of Company </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="testimonial-content">
+                    <div class="testimonial">
+                        <div class="test-img">
+                            <img src="~/Theme/assets/images/team4.jpg" class="img-fluid"
+                                 alt="client-img">
+                        </div>
+                        <blockquote>
+                            <q>
+                                Lorem ipsum dolor sit amet int consectetur adipisicing elit. Velita beatae
+                                laudantium Quas minima sunt natus tempore, maiores aliquid modi felis vitae
+                                facere aperiam sequi optio lacinia id ipsum non velit, culpa.
+                                voluptate rem ullam dolore nisi est quasi, doloribus tempora.
+                            </q>
+                        </blockquote>
+                        <div class="testi-des">
+                            <div class="peopl align-self">
+                                <h3>Ruth Edwards</h3>
+                                <p class="indentity">Client Of Company </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- /grids -->
+<!--</div>-->
+<!-- //grids -->
+<!--</section>-->
+<!-- //testimonials -->

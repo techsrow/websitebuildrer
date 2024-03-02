@@ -1,0 +1,21 @@
+﻿@model List<WebsiteBuilder.Models.Service>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h2>Services for the Website</h2>
+
+<ul>
+    @foreach (var service in Model)
+    {
+        <li>@service.ServiceName</li>
+
+        <li><img src="@service.ServiceImage" height="200" width="200" /></li>
+    }
+</ul>

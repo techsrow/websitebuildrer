@@ -1,0 +1,38 @@
+﻿@model List<WebsiteBuilder.Models.Testimonial>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h2>Testimonial for the Website</h2>
+
+
+
+
+<table>
+   <thead>
+       <tr>
+           <td>Name</td>
+           <td>Photo</td>
+           <td></td>
+       </tr>
+   </thead>
+
+   <tbody>
+       @foreach (var testimonial in Model)
+       {
+
+           <tr>
+               <td>@testimonial.Fullname</td>
+               <td><img src="@testimonial.Photo" height="60" width="60" style="border-radius:100%" /></td>
+           </tr>
+          
+       }
+
+   </tbody>
+</table>

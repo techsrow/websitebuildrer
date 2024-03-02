@@ -1,0 +1,434 @@
+﻿@model WebsiteBuilder.Models.Website
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Theme/admin/assets/vendor/dropify/css/dropify.min.css">
+
+<div class="container-fluid">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="WebsiteId" />
+        <div class="row clearfix mt-5">
+
+
+            <div class="col-lg-4 col-md-12">
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Bussines Name</h2>
+                    </div>
+                    <div class="body">
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-12">
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Public Url</h2>
+                    </div>
+                    <div class="body">
+                        <input asp-for="PublicUrl" class="form-control" />
+                        <span asp-validation-for="PublicUrl" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-12">
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Proud Member Of</h2>
+                    </div>
+                    <div class="body">
+                        <label>
+                            <input asp-for="IsSCGT" /> SCGT
+                        </label>
+
+                        @*<label>
+                            <input asp-for="IsMBC" /> MBC
+                        </label>
+                        <label>
+                            <input asp-for="IsBNI"> BNI
+                        </label>
+                        <label>
+                            <input asp-for="IsMCC"> MCC
+                        </label>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+
+                    <div class="header">
+                        <h2>Color Pickers <small>Taken from <a href="https://github.com/mjolnic/bootstrap-colorpicker/" target="_blank"></a></small></h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <b>Primary Color :</b>
+                                <div class="input-group colorpicker">
+                                    <input type="text" asp-for="PrimaryBg" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><span class="input-group-addon"><i style="background-color: @Model.PrimaryBg;"></i></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <b>Secondry Background Color :</b>
+                                <div class="input-group colorpicker">
+                                    <input type="text" class="form-control" name="SecondryBg" value="@Model.SecondryBg">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><span class="input-group-addon"><i></i></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="row clearfix">
+
+            <div class="col-lg-4 col-md-12">
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Logo</h2>
+                    </div>
+                    <div class="body">
+                        <input type="file" class="dropify form-control" accept="image/*" id="dropify-event" name="LogoImage" data-default-file="@Model.LogoImage">
+
+                        <input type="hidden"  name="LogoImage" value="0">
+                        <span asp-validation-for="LogoImage" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-12">
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Personal Photo</h2>
+                    </div>
+                    <div class="body">
+                        <input type="file" class="dropify form-control" accept="image/*" id="dropify-event" name="PersonalPhoto" data-default-file="@Model.PersonalPhoto">
+
+                        <input type="hidden" name="PersonalPhoto" value="0">
+                        <span asp-validation-for="PersonalPhoto" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Gallery Images</h2>
+                    </div>
+                    <div class="body">
+
+                        <input type="file" class="dropify form-control" name="images" multiple accept="image/*" />
+                        <span asp-validation-for="Images" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row clearfix">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Personal Details <small>Taken from <a href="https://github.com/RobinHerbots/jquery.inputmask" target="_blank">github.com/RobinHerbots/jquery.inputmask</a></small></h2>
+                        <ul class="header-dropdown dropdown dropdown-animated scale-left">
+                            <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
+                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
+
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="demo-masked-input">
+                            <div class="row clearfix">
+
+
+                                <div class="col-lg-3 col-md-6">
+                                    <b>Full Name:</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" asp-for="NamewithDesignation" class="form-control" placeholder="Full Name Here">
+
+                                        <span asp-validation-for="NamewithDesignation" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+                                    <b>Mobile Phone Number</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-mobile-phone"></i></span>
+                                        </div>
+                                        <input type="text" asp-for="CallingNumber" class="form-control mobile-phone-number" placeholder="Ex: +00 (000) 000-00-00">
+
+                                        <span asp-validation-for="CallingNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+                                    <b>WhatsApp:</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-whatsapp"></i></span>
+                                        </div>
+                                        <input type="text" asp-for="WhatsappNumber" class="form-control mobile-phone-number" placeholder="Ex: +00 (000) 000-00-00">
+
+                                        <span asp-validation-for="WhatsappNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+                                    <b>SMS:</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                        </div>
+                                        <input type="text" asp-for="SmsNumber" class="form-control email" placeholder="Ex: +00 (000) 000-00-00">
+
+                                        <span asp-validation-for="SmsNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+                                    <b>Email:</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                        </div>
+                                        <input type="text" asp-for="Email" class="form-control email" placeholder="Email Here">
+
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <b>Address:</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-location-arrow"></i></span>
+                                        </div>
+                                        <textarea rows="5" cols="4" asp-for="FullAddress" class="form-control email" placeholder="Email Here"></textarea>
+
+                                        <span asp-validation-for="FullAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Social Media Profiles:</h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="phone" class="control-label">Facebook</label>
+                                    <input type="text" asp-for="facebook" class="form-control">
+                                  
+                                    <span asp-validation-for="facebook" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="phone-ex" class="control-label">Instagram</label>
+                                    <input type="text" asp-for="Instagram" class="form-control">
+                                    
+                                    <span asp-validation-for="Instagram" class="text-danger"></span>
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="tax-id" class="control-label">Linked In</label>
+                                    <input type="text" asp-for="Linkdin" class="form-control">
+                                    
+                                    <span asp-validation-for="Linkdin" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="ssn" class="control-label">X Url</label>
+                                    <input type="text" asp-for="Twitter" class="form-control">
+                                 
+                                    <span asp-validation-for="Linkdin" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="product-key" class="control-label">Youtube Url</label>
+                                    <input type="text" asp-for="Youtube" class="form-control">
+                                   
+                                    <span asp-validation-for="Youtube" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Services <small> <a href="http://ckeditor.com/" target="_blank"></a></small></h2>
+                    </div>
+                    <div class="body">
+                        <textarea id="ckeditor" asp-for="ProductOrServiceName">
+                        
+                            </textarea>
+                        <span asp-validation-for="ProductOrServiceName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>About Us <small> <a href="http://ckeditor.com/" target="_blank"></a></small></h2>
+                    </div>
+                    <div class="body">
+                        <textarea id="ckeditor1" rows="20" class="form-control" cols="60" asp-for="AboutUs">
+                        
+                            </textarea>
+                        <span asp-validation-for="AboutUs" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <input type="submit" value="Update" style="background-color: #FEB800;border:none;" class="btn btn-primary btn-block btn-lg" />
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor 4
+    // instance, using default configuration.
+    CKEDITOR.replace('ckeditor1');
+</script>
+
+
+
+
+<script>
+    function loadCategories() {
+        // Simulate loading categories (replace this with your actual data or AJAX call)
+        var categories = [
+            { id: 1, name: 'Ac Service' },
+            { id: 2, name: 'Care Hire' },
+            { id: 3, name: 'Astrologers' },
+            { id: 3, name: 'Body Massage Centers' },
+            { id: 3, name: 'Beauty Spa' },
+            { id: 3, name: 'Care Hire' },
+            { id: 3, name: 'Caterers' },
+            { id: 3, name: 'Charted Accounted' },
+            { id: 3, name: 'Computer Training' },
+            { id: 3, name: 'Courier Service' },
+            { id: 3, name: 'Computer & Laptop Service' },
+            { id: 3, name: 'Car Repair Service' },
+            { id: 3, name: 'Dermatologists' },
+            { id: 3, name: 'Dentists' },
+            { id: 3, name: 'Electrician' },
+            { id: 3, name: 'Event Organizer' },
+            { id: 3, name: 'Real Estate' },
+            { id: 3, name: 'Fabrication' },
+            { id: 3, name: 'Furniture Repair Service' },
+            { id: 3, name: 'Hospitals' },
+            { id: 3, name: 'House Keeping Services' },
+            { id: 3, name: 'Hobbies' },
+            { id: 3, name: 'Interior Designers' },
+            { id: 3, name: 'Internet Website Designers' },
+            { id: 3, name: 'Jewllery Showrooms' },
+            { id: 3, name: 'Lawyers' },
+            { id: 3, name: 'Transporters' },
+            { id: 3, name: 'Photographers' },
+            { id: 3, name: 'Nursing Services' },
+            { id: 3, name: 'Printing & Publishing Services' },
+            { id: 3, name: 'Placement Services' },
+            { id: 3, name: 'Pest Control Services' },
+            { id: 3, name: 'Painting Contractors' },
+            { id: 3, name: 'Packers and Movers' },
+            { id: 3, name: 'Scrap Dealers' },
+            { id: 3, name: 'Scrap Buyers' },
+            { id: 3, name: 'Registration Consultants' },
+            { id: 3, name: 'Security System' },
+            { id: 3, name: 'Coaching' },
+            { id: 3, name: 'Vocational Training' },
+            { id: 3, name: 'Digital Agency' },
+            { id: 3, name: 'Web Design Agency' },
+            { id: 3, name: 'Information Technology' },
+            { id: 3, name: 'Ecommerce' }
+
+        ];
+
+        var categoryDropdown = document.getElementById('Category');
+
+        categories.forEach(function (category) {
+            var option = document.createElement('option');
+            option.value = category.id;
+            option.text = category.name;
+            categoryDropdown.add(option);
+        });
+    }
+
+    // Call the function to load categories when the page loads
+    loadCategories();
+
+</script>

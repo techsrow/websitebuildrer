@@ -1,0 +1,18 @@
+﻿@model List<WebsiteBuilder.Models.Slider>
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+
+<ul>
+    @foreach (var slider in Model)
+    {
+        <li>@slider.SliderTitle</li>
+
+        <li><img src="@slider.SliderImage" height="200" width="200" /></li>
+    }
+</ul>

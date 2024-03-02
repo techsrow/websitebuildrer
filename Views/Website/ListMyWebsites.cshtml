@@ -1,0 +1,11 @@
+﻿@model WebsiteBuilder.Models.Website
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h2>My Websites</h2>
+
+<ul>
+    
+    <li><a asp-Controller="Website" asp-action="Edit" asp-route-id="@Model.WebsiteId">Edit</a></li>
+    <!-- Display other website properties as needed -->
+
+</ul>
+

@@ -1,0 +1,25 @@
+﻿<!-- VerifyOtp.cshtml -->
+
+@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+</head>
+<body>
+    <h2>Verify OTP</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <p style="color: red;">@ViewBag.Error</p>
+    }
+
+    <form method="post" action="/Account/VerifyOtp">
+        <input type="hidden" name="phoneNumber" value="@Model" />
+        <label for="otp">Enter OTP:</label>
+        <input type="text" id="otp" name="enteredOtp" required pattern="[0-9]{6}" placeholder="Enter the OTP received on your phone" />
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

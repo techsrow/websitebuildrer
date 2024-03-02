@@ -1,0 +1,25 @@
+﻿@model List<WebsiteBuilder.Models.Couter>
+
+
+<table>
+
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Starting Number</td>
+            <td>Ending Number</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.StartNumber</td>
+            <td>@item.EndNumber</td>
+        </tr>
+        }
+
+    </tbody>
+</table>

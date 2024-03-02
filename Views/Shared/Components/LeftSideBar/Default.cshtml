@@ -1,0 +1,94 @@
+﻿@using WebsiteBuilder.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+<div class="navbar-brand">
+    @if (Model.WebsiteId > 0)
+    {
+        @if (Model.LogoImage != null)
+        {
+            <a asp-controller="Dashboard" asp-action="Index">
+                <img src="@Model.LogoImage" alt="Techsrow" class="img-fluid logo"><span>
+                    @if (Model.PublicUrl != null)
+                    {@Model.PublicUrl}
+                </span>
+            </a>
+        }
+    }
+    else
+    {
+        <p>Not Avilable</p>
+    }
+
+    @* <a href="index.html"><img src="@Model.LogoImage" alt="HexaBit Logo" class="img-fluid logo"><span>HexaBit</span></a>*@
+    <button type="button" class="btn-toggle-offcanvas btn btn-sm btn-default float-right"><i class="lnr lnr-menu fa fa-chevron-circle-left"></i></button>
+</div>
+<div class="sidebar-scroll">
+
+    <div class="user-account">
+        <div class="user_div">
+            @if (Model.WebsiteId > 0)
+            {
+                @if (Model.LogoImage != null)
+                {
+                    <img src="@Model.LogoImage" class="user-photo" alt="User Profile Picture">
+                }
+            }
+
+
+        </div>
+        <div class="dropdown">
+            <span>Welcome,</span>
+            @*<a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>@Model.Title</strong></a>*@
+            <ul class="dropdown-menu dropdown-menu-right account">
+                
+               
+                <li class="divider"></li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" asp-action="Logout" asp-controller="Account">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" onclick="showAlert('Log Out!')"><i class="icon-power"></i> Logout</button>
+                   
+                    </form>
+
+                }
+
+               
+            </ul>
+        </div>
+    </div>
+    <nav id="left-sidebar-nav" class="sidebar-nav">
+        <ul id="main-menu" class="metismenu">
+            <li class="active"><a asp-controller="Dashboard" asp-action="Index"><i class="icon-home"></i><span>Dashboard</span></a></li>
+
+            @if (Model.WebsiteId > 0)
+            {
+                <li>
+                    <a asp-Controller="Website" asp-action="Edit" asp-route-id="@Model.WebsiteId" class="has-arrow"><i class="icon-pencil"></i><span>Edit Website</span></a>
+
+                </li>
+            }
+            else
+            {
+                <a asp-Controller="Website" asp-action="Create" class="has-arrow"><i class="icon-pencil"></i><span>Create Your Site</span></a>
+            }
+
+            <li>
+                <a href="#Authentication" class="has-arrow"><i class="icon-lock"></i><span>Authentication</span></a>
+                <ul>
+                   
+                    <li><a asp-controller="User" asp-action="ChangePassword">Change Password</a></li>
+                    <li><a asp-controller="User" asp-action="ForgotPassword" >Forgot Password</a></li>
+                   
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
+</div>

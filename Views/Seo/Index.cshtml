@@ -1,0 +1,40 @@
+﻿@model List<WebsiteBuilder.Models.Seo>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h2>Seo  for the Website</h2>
+
+
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Sitmap</td>
+            
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var seo in Model)
+        {
+
+            <tr>
+                <td>@seo.SeoTitle</td>
+                <td>@seo.SiteName</td>
+                
+            </tr>
+
+        }
+
+    </tbody>
+</table>

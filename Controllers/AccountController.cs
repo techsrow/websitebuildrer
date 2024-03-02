@@ -1,0 +1,293 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Threading.Tasks;
+using WebsiteBuilder.Models;
+using WebsiteBuilder.Services;
+
+using WebsiteBuilder.ViewModels;
+
+namespace WebsiteBuilder.Controllers
+{
+
+   
+    public class AccountController : Controller
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ILogger<LoginViewModel> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly IEmailService _emailSender;
+
+        private readonly OtpService _otpService;
+        private readonly SmsService _smsService;
+
+        public AccountController(UserManager<ApplicationUser> userManager,
+        SignInManager<ApplicationUser> signInManager, ILogger<LoginViewModel> logger, ApplicationDbContext context, IEmailService emailSender, OtpService otpService, SmsService smsService)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
+            _context = context;
+            _emailSender = emailSender;
+            _otpService = otpService;
+            _smsService = smsService;
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken] // Include antiforgery token validation
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync(); // Sign the user out
+
+            ViewData["Message"] = "This is a server-side message.";
+
+            // Redirect to a different page after logging out
+            return RedirectToAction("homepage", "Home");
+        }
+
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    var userM = await _context.Users.Where(u => u.Email == user.Email).FirstOrDefaultAsync();
+                    _logger.LogInformation("User logged in.");
+                    return RedirectToAction("Index", "Website");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
+            }
+            return View(user);
+        }
+
+        [Authorize]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [Authorize]
+        public IActionResult ChangePasswordConfirmation()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user != null)
+                {
+                    var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("ChangePasswordConfirmation");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    // Generate a password reset token
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                    // Create a password reset link
+                    var callbackUrl = Url.Action("User", "ResetPassword", new { userId = user.Id, token }, protocol: HttpContext.Request.Scheme);
+
+                    // Send the reset link via email
+                    // (Use your email service here)
+                    await _emailSender.SendEmailAsync(user.Email, "Password Reset", $"Click <a href='{callbackUrl}'>here</a> to reset your password.");
+
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+
+                // Display a message that the email is sent (for security reasons)
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string userId, string token)
+        {
+            // Verify the token and userId
+            // You can add validation here if needed
+
+            var model = new ResetPasswordViewModel
+            {
+                UserId = userId,
+                Token = token
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(model.UserId);
+                if (user != null)
+                {
+                    // Reset the user's password
+                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        // Redirect to the login page or a password reset confirmation page
+                        return RedirectToAction("ResetPasswordConfirmation");
+                    }
+
+                    // Display errors if the password reset fails
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+                else
+                {
+                    // Display a message that the user does not exist
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SendOtp(string phoneNumber)
+        {
+            // Validate the phone number (add your own validation logic)
+
+            // Generate OTP
+            string otp = _otpService.GenerateOtp();
+
+            // Store OTP in session or database (for verification)
+
+            // Send OTP via SMS
+            _smsService.SendSms(phoneNumber, $"Your OTP is: {otp}");
+
+            return View("VerifyOtp", new { PhoneNumber = phoneNumber });
+        }
+        [HttpPost]
+        public IActionResult VerifyOtp(string phoneNumber, string enteredOtp)
+        {
+            // Retrieve stored OTP from session or database
+            string storedOtp = HttpContext.Session.GetString("Otp");
+
+
+            // Validate entered OTP
+            if (enteredOtp == storedOtp)
+            {
+                // OTP is valid, log in the user
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Invalid OTP, show error message
+                ViewBag.Error = "Invalid OTP. Please try again.";
+                return View("VerifyOtp", new { PhoneNumber = phoneNumber });
+            }
+        }
+
+    }
+}
